@@ -61,9 +61,10 @@ function AppointmentForm({ editingAppointment, onSuccess, onCancel }) {
       return;
     }
     
+    const apiUrl = import.meta.env.VITE_API_URL || '';
     const url = editingAppointment 
-      ? `/api/appointments/${editingAppointment._id}`
-      : '/api/appointments';
+      ? `${apiUrl}/api/appointments/${editingAppointment._id}`
+      : `${apiUrl}/api/appointments`;
     const method = editingAppointment ? 'PUT' : 'POST';
 
     try {

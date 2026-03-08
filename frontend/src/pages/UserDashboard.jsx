@@ -9,7 +9,8 @@ function UserDashboard() {
 
   const fetchUserAppointments = async () => {
     try {
-      const response = await fetch('/api/appointments');
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/appointments`);
       const data = await response.json();
       setAppointments(data);
     } catch (error) {

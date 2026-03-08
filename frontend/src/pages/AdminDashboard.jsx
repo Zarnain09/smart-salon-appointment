@@ -16,7 +16,8 @@ function AdminDashboard() {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch('/api/appointments');
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/appointments`);
       const data = await response.json();
       setAppointments(data);
       calculateStats(data);
@@ -43,7 +44,8 @@ function AdminDashboard() {
   const handleDelete = async (id) => {
     if (confirm('Are you sure you want to delete this appointment?')) {
       try {
-        await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
+        const apiUrl = import.meta.env.VITE_API_URL || '';
+        await fetch(`${apiUrl}/api/appointments/${id}`, { method: 'DELETE' });
         toast.success('Appointment deleted successfully!');
         fetchAppointments();
       } catch (error) {

@@ -13,7 +13,8 @@ function HomePage() {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch('/api/appointments');
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/appointments`);
       const data = await response.json();
       setAppointments(data);
     } catch (error) {
@@ -24,7 +25,8 @@ function HomePage() {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      await fetch(`${apiUrl}/api/appointments/${id}`, { method: 'DELETE' });
       toast.success('Appointment deleted successfully!');
       fetchAppointments();
     } catch (error) {
